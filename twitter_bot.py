@@ -39,23 +39,12 @@ def post_tweet(msg):
 	    print ("--tweet Error code: {0}--".format(req.status_code))
 
 
-done = False
-while True:
-	date = dt.now()
-	print(date, "checking now...")
-	if done == False and (date.hour == 23 or date.hour == 16) and 59 > date.minute > 20:
-		print("--call core main--")
-		result = core.main()
-		done = True
-		msg = "【unkaitter bot test】{0}に雲海が出る尤度は{1}です。".format((date + td(days=1)).strftime("%Y-%m-%d"), result[0][1])
-		print(msg)
-		post_tweet(msg)
-		print("--done--")
-	if date.hour == 0 or date.hour == 17:
-		print("--ready--")
-		done = False
-	time.sleep(60)
-
-
-
+date = dt.now()
+print(date, "checking now...")
+print("--call core main--")
+result = core.main()
+msg = "【unkaitter bot test】{0}に雲海が出る尤度は{1}です。{2}".format((date + td(days=1)).strftime("%Y-%m-%d"), result[0][1], date)
+print(msg)
+post_tweet(msg)
+print("--done--")
 
